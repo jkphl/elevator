@@ -1,0 +1,27 @@
+{
+  "generator-clearphp": {
+    "run": 127,
+    "github": {
+      "ssh": "git@github.com:jkphl/elevator.git",
+      "https": "https://github.com/jkphl/elevator"
+    },
+    "codeclimate": "ed734d1a6a8c1fef74954f7b5e5eb020a4a9d3e3a8acb9ecb1791f0982f90da0",
+    "scrutinizer": true,
+    "coverage": true,
+    "docs": true,
+    "apidocs": true,
+    "year": 2017,
+    "vendor": "jkphl",
+    "project": "elevator",
+    "description": "Elevator pattern implementation for PHP projects",
+    "website": "https://github.com/jkphl/elevator",
+    "license": "MIT",
+    "stability": "stable",
+    "namespace": "Jkphl",
+    "module": "Elevator",
+    "php": ">=5.6",
+    "authorName": "Joschi Kuphal",
+    "authorEmail": "joschi@kuphal.net",
+    "authorWebsite": "https://jkphl.is"
+  }
+}
