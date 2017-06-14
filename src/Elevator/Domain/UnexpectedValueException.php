@@ -4,10 +4,10 @@
  * elevator
  *
  * @category Jkphl
- * @package Jkphl\Rdfalite
- * @subpackage Jkphl\Elevator\Application
- * @author Joschi Kuphal <joschi@tollwerk.de> / @jkphl
- * @copyright Copyright © 2017 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
+ * @package Jkphl\Micrometa
+ * @subpackage Jkphl\Elevator\Domain
+ * @author Joschi Kuphal <joschi@kuphal.net> / @jkphl
+ * @copyright Copyright © 2017 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
@@ -34,45 +34,50 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Jkphl\Elevator\Application;
-
-use Jkphl\Elevator\Domain\ElevationMap;
+namespace Jkphl\Elevator\Domain;
 
 /**
- * Elevator service
+ * Unexpected value exception
  *
  * @package Jkphl\Elevator
- * @subpackage Jkphl\Elevator\Application
+ * @subpackage Jkphl\Elevator\Domain
  */
-class ElevatorService
+class UnexpectedValueException extends \UnexpectedValueException
 {
     /**
-     * Source object
+     * Object required
      *
-     * @var object
+     * @var string
      */
-    protected $source;
-
+    const OBJECT_REQUIRED_STR = 'Only objects can be elevated';
     /**
-     * Constructor
+     * Object required
      *
-     * @param object $source Source object or exception
+     * @var int
      */
-    public function __construct($source)
-    {
-        $this->source = $source;
-    }
-
+    const OBJECT_REQUIRED = 1497459727;
     /**
-     * Elevate the source object to the given target class
+     * Non-internal class required
      *
-     * @param string $class Target class name
-     * @return object Elevated object
+     * @var string
      */
-    public function elevate($class)
-    {
-        $elevationMap = new ElevationMap($this->source);
-        print_r($elevationMap->getMap());
-        return $this->source;
-    }
+    const NON_INTERNAL_REQUIRED_STR = 'Internal class "%s" cannot be elevated';
+    /**
+     * Non-internal class required
+     *
+     * @var int
+     */
+    const NON_INTERNAL_REQUIRED = 1497460006;
+    /**
+     * Invalid target class
+     *
+     * @var string
+     */
+    const INVALID_TARGET_CLASS_STR = 'Target class "%s" must extend "%s"';
+    /**
+     * Invalid target class
+     *
+     * @var int
+     */
+    const INVALID_TARGET_CLASS = 1497460391;
 }

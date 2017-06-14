@@ -62,4 +62,13 @@ class Inner
      * @var string
      */
     public $innerPublic = 'inner-public';
+
+    /**
+     * Return the value of the private variable
+     *
+     * @return string Private variable value
+     */
+    public function getInnerPrivate() {
+        return $this->innerPrivate;
+    }
 }

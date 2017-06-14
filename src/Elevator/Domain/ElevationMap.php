@@ -108,4 +108,16 @@ class ElevationMap
     {
         return $this->map;
     }
+
+    /**
+     * Return the property values for a particular class
+     *
+     * @param \ReflectionClass $class Class reflection
+     * @return array Property values
+     */
+    public function getPropertyValues(\ReflectionClass $class)
+    {
+        $className = $class->getName();
+        return isset($this->map[$className]) ? $this->map[$className] : [];
+    }
 }

@@ -44,5 +44,94 @@ namespace Jkphl\Elevator\Domain;
  */
 class Elevator
 {
+    /**
+     * Source object
+     *
+     * @var object
+     */
+    protected $object;
+    /**
+     * Source object class reflection
+     *
+     * @var \ReflectionClass
+     */
+    protected $class;
 
+    /**
+     * Constructor
+     *
+     * @param object $object Source object
+     * @throws UnexpectedValueException If the argument is not an object
+     */
+    public function __construct($object)
+    {
+        // If the argument is not an object
+        if (!is_object($object)) {
+            throw new UnexpectedValueException(
+                UnexpectedValueException::OBJECT_REQUIRED_STR,
+                UnexpectedValueException::OBJECT_REQUIRED
+            );
+        }
+
+        $this->object = $object;
+        $this->class = new \ReflectionClass($this->object);
+
+        // If the object is of an internal class
+        if ($this->class->isInternal()) {
+            throw new UnexpectedValueException(
+                sprintf(UnexpectedValueException::NON_INTERNAL_REQUIRED_STR, $this->class->getName()),
+                UnexpectedValueException::NON_INTERNAL_REQUIRED
+            );
+        }
+    }
+
+    /**
+     * Elevate the current object to a particular class
+     *
+     * @param \ReflectionClass $class Target class
+     * @param ElevationMap $map
+     * @return object Elevated target object
+     */
+    public function elevate(\ReflectionClass $class, ElevationMap $map)
+    {
+        // If the target class doesn't extend the source object class
+        if (!$class->isSubclassOf($this->class->getName())) {
+            throw new UnexpectedValueException(
+                sprintf(
+                    UnexpectedValueException::INVALID_TARGET_CLASS_STR,
+                    $class->getName(),
+                    $this->class->getName()
+                ),
+                UnexpectedValueException::INVALID_TARGET_CLASS
+            );
+        }
+
+        return $this->mergeMap($class->newInstanceWithoutConstructor(), $class, $map);
+    }
+
+    /**
+     * Recursively merge an elevation map into an elevated target object
+     *
+     * @param object $object Target object
+     * @param \ReflectionClass $class Current class
+     * @param ElevationMap $map Elevation map
+     * @return object Target object
+     */
+    protected function mergeMap($object, \ReflectionClass $class, ElevationMap $map)
+    {
+        // Run through all property values declared by this class
+        foreach ($map->getPropertyValues($class) as $propertyName => $propertyValue) {
+            $property = $class->getProperty($propertyName);
+            $property->setAccessible(true);
+            $property->setValue($object, $propertyValue);
+            $property->setAccessible(false);
+        }
+
+        $parentClass = $class->getParentClass();
+        if (($parentClass instanceof \ReflectionClass) && !$parentClass->isInternal()) {
+            $this->mergeMap($object, $parentClass, $map);
+        }
+
+        return $object;
+    }
 }

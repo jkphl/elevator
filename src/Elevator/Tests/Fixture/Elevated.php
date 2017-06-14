@@ -5,7 +5,7 @@
  *
  * @category Jkphl
  * @package Jkphl\Rdfalite
- * @subpackage Jkphl\Elevator\Application
+ * @subpackage Jkphl\Elevator\Tests\Fixture
  * @author Joschi Kuphal <joschi@tollwerk.de> / @jkphl
  * @copyright Copyright © 2017 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
@@ -34,45 +34,32 @@
  *  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  ***********************************************************************************/
 
-namespace Jkphl\Elevator\Application;
-
-use Jkphl\Elevator\Domain\ElevationMap;
+namespace Jkphl\Elevator\Tests\Fixture;
 
 /**
- * Elevator service
+ * Elevated test class
  *
  * @package Jkphl\Elevator
- * @subpackage Jkphl\Elevator\Application
+ * @subpackage Jkphl\Elevator\Tests
  */
-class ElevatorService
+class Elevated extends Outer
 {
     /**
-     * Source object
+     * Private property
      *
-     * @var object
+     * @var string
      */
-    protected $source;
-
+    protected $elevatedPrivate = 'elevated-private';
     /**
-     * Constructor
+     * Protected property
      *
-     * @param object $source Source object or exception
+     * @var string
      */
-    public function __construct($source)
-    {
-        $this->source = $source;
-    }
-
+    protected $elevatedProtected = 'elevated-protected';
     /**
-     * Elevate the source object to the given target class
+     * Public property
      *
-     * @param string $class Target class name
-     * @return object Elevated object
+     * @var string
      */
-    public function elevate($class)
-    {
-        $elevationMap = new ElevationMap($this->source);
-        print_r($elevationMap->getMap());
-        return $this->source;
-    }
+    public $elevatedPublic = 'elevated-public';
 }

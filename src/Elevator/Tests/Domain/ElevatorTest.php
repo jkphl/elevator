@@ -4,10 +4,10 @@
  * elevator
  *
  * @category Jkphl
- * @package Jkphl\Rdfalite
+ * @package Jkphl\Micrometa
  * @subpackage Jkphl\Elevator\Tests\Domain
- * @author Joschi Kuphal <joschi@tollwerk.de> / @jkphl
- * @copyright Copyright © 2017 Joschi Kuphal <joschi@tollwerk.de> / @jkphl
+ * @author Joschi Kuphal <joschi@kuphal.net> / @jkphl
+ * @copyright Copyright © 2017 Joschi Kuphal <joschi@kuphal.net> / @jkphl
  * @license http://opensource.org/licenses/MIT The MIT License (MIT)
  */
 
@@ -37,55 +37,71 @@
 namespace Jkphl\Elevator\Tests\Domain;
 
 use Jkphl\Elevator\Domain\ElevationMap;
+use Jkphl\Elevator\Domain\Elevator;
+use Jkphl\Elevator\Tests\Fixture\Elevated;
 use Jkphl\Elevator\Tests\Fixture\Inner;
 use Jkphl\Elevator\Tests\Fixture\Outer;
+use Jkphl\Elevator\Tests\Fixture\Unrelated;
 
 /**
- * Elevation map tests
+ * Elevator test
  *
  * @package Jkphl\Elevator
  * @subpackage Jkphl\Elevator\Tests
  */
-class ElevationMapTest extends \PHPUnit_Framework_TestCase
+class ElevatorTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Test the elevation map
+     * Test a non-object
+     *
+     * @expectedException \Jkphl\Elevator\Domain\UnexpectedValueException
+     * @expectedExceptionCode 1497459727
      */
-    public function testElevationMap()
+    public function testNonObject()
     {
-        $testObject = new Outer();
-        $elevationMap = new ElevationMap($testObject);
-        $expectedElevationMap = json_decode(
-            file_get_contents(
-                dirname(__DIR__).DIRECTORY_SEPARATOR.'Fixture'.DIRECTORY_SEPARATOR.'outer-elevation-map.json'
-            ),
-            true
-        );
-        $this->assertEquals($expectedElevationMap, $elevationMap->getMap());
-        $this->assertEquals(
-            $expectedElevationMap[Inner::class],
-            $elevationMap->getPropertyValues(new \ReflectionClass(Inner::class))
-        );
+        new Elevator(1);
     }
 
     /**
-     * Test the elevation map with a standard object
+     * Test a non-object
+     *
+     * @expectedException \Jkphl\Elevator\Domain\UnexpectedValueException
+     * @expectedExceptionCode 1497460006
      */
-    public function testElevationMapStdClass()
+    public function testInternalClass()
     {
-        $stdObject = new \stdClass();
-        $stdObject->property = 'value';
-        $elevationMap = new ElevationMap($stdObject);
-        $this->assertEquals([], $elevationMap->getMap());
+        new Elevator(new \stdClass());
     }
 
     /**
-     * Test the elevation map with a native object
+     * Test an invalid target class
+     *
+     * @expectedException \Jkphl\Elevator\Domain\UnexpectedValueException
+     * @expectedExceptionCode 1497460391
      */
-    public function testElevationMapNativeObject()
+    public function testInvalidTargetClass()
     {
-        $arrayObject = new \ArrayObject([1, 2, 3], \ArrayObject::STD_PROP_LIST);
-        $elevationMap = new ElevationMap($arrayObject);
-        $this->assertEquals([], $elevationMap->getMap());
+        $inner = new Inner();
+        $elevator = new Elevator($inner);
+        $elevationMap = new ElevationMap($inner);
+        $elevator->elevate(new \ReflectionClass(Unrelated::class), $elevationMap);
+    }
+
+    /**
+     * Test an invalid target class
+     */
+    public function testElevation()
+    {
+        $random = md5(rand());
+        $outer = new Outer();
+        $outer->innerPublic = $random;
+        $elevator = new Elevator($outer);
+        $elevationMap = new ElevationMap($outer);
+
+        /** @var Elevated $elevated */
+        $elevated = $elevator->elevate(new \ReflectionClass(Elevated::class), $elevationMap);
+        $this->assertInstanceOf(Elevated::class, $elevated);
+        $this->assertEquals($random, $elevated->innerPublic);
+        $this->assertEquals('inner-private', $elevated->getInnerPrivate());
     }
 }
