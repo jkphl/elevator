@@ -1,0 +1,17 @@
+{
+    "Jkphl\\Elevator\\Tests\\Fixture\\Outer": {
+        "outerPrivate": "outer-private",
+        "outerProtected": "outer-protected",
+        "outerPublic": "outer-public"
+    },
+    "Jkphl\\Elevator\\Tests\\Fixture\\Middle": {
+        "middlePrivate": "middle-private",
+        "middleProtected": "middle-protected",
+        "middlePublic": "middle-public"
+    },
+    "Jkphl\\Elevator\\Tests\\Fixture\\Inner": {
+        "innerPrivate": "inner-private",
+        "innerProtected": "inner-protected",
+        "innerPublic": "inner-public"
+    }
+}
