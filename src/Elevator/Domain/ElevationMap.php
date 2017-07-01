@@ -90,7 +90,7 @@ class ElevationMap
             }
         }
 
-        $this->map[$class->getName()] = $classMap;
+        $this->map[$class->name] = $classMap;
 
         // Recurse if necessary
         $parentClass = $class->getParentClass();
@@ -117,7 +117,7 @@ class ElevationMap
      */
     public function getPropertyValues(\ReflectionClass $class)
     {
-        $className = $class->getName();
+        $className = $class->name;
         return isset($this->map[$className]) ? $this->map[$className] : [];
     }
 }

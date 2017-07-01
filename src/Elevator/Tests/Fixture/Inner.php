@@ -45,6 +45,12 @@ namespace Jkphl\Elevator\Tests\Fixture;
 class Inner
 {
     /**
+     * Public property
+     *
+     * @var string
+     */
+    public $innerPublic = 'inner-public';
+    /**
      * Private property
      *
      * @var string
@@ -56,19 +62,14 @@ class Inner
      * @var string
      */
     protected $innerProtected = 'inner-protected';
-    /**
-     * Public property
-     *
-     * @var string
-     */
-    public $innerPublic = 'inner-public';
 
     /**
      * Return the value of the private variable
      *
      * @return string Private variable value
      */
-    public function getInnerPrivate() {
+    public function getInnerPrivate()
+    {
         return $this->innerPrivate;
     }
 }

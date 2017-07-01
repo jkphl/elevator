@@ -57,7 +57,7 @@ class ElevationMapTest extends \PHPUnit_Framework_TestCase
         $elevationMap = new ElevationMap($testObject);
         $expectedElevationMap = json_decode(
             file_get_contents(
-                dirname(__DIR__).DIRECTORY_SEPARATOR.'Fixture'.DIRECTORY_SEPARATOR.'outer-elevation-map.json'
+                dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Fixture' . DIRECTORY_SEPARATOR . 'outer-elevation-map.json'
             ),
             true
         );

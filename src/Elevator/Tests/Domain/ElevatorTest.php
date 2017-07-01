@@ -59,6 +59,7 @@ class ElevatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonObject()
     {
+        /** @noinspection PhpParamsInspection */
         new Elevator(1);
     }
 

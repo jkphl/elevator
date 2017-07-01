@@ -45,6 +45,12 @@ namespace Jkphl\Elevator\Tests\Fixture;
 class Outer extends Middle
 {
     /**
+     * Public property
+     *
+     * @var string
+     */
+    public $outerPublic = 'outer-public';
+    /**
      * Private property
      *
      * @var string
@@ -56,10 +62,4 @@ class Outer extends Middle
      * @var string
      */
     protected $outerProtected = 'outer-protected';
-    /**
-     * Public property
-     *
-     * @var string
-     */
-    public $outerPublic = 'outer-public';
 }
