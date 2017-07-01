@@ -36,6 +36,10 @@
 
 namespace Jkphl\Elevator\Tests\Ports;
 
+use Jkphl\Elevator\Ports\Elevator;
+use Jkphl\Elevator\Tests\Fixture\Elevated;
+use Jkphl\Elevator\Tests\Fixture\Outer;
+
 /**
  * Elevator test
  *
@@ -49,6 +53,14 @@ class ElevatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testElevator()
     {
+        $random = md5(rand());
+        $outer = new Outer();
+        $outer->innerPublic = $random;
 
+        /** @var Elevated $elevated */
+        $elevated = Elevator::elevate($outer, Elevated::class);
+        $this->assertInstanceOf(Elevated::class, $elevated);
+        $this->assertEquals($random, $elevated->innerPublic);
+        $this->assertEquals('inner-private', $elevated->getInnerPrivate());
     }
 }

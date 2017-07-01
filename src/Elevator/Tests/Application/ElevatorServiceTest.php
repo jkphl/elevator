@@ -36,6 +36,10 @@
 
 namespace Jkphl\Elevator\Tests\Application;
 
+use Jkphl\Elevator\Application\ElevatorService;
+use Jkphl\Elevator\Tests\Fixture\Elevated;
+use Jkphl\Elevator\Tests\Fixture\Outer;
+
 /**
  * Elevator Service test
  *
@@ -49,6 +53,15 @@ class ElevatorServiceTest extends \PHPUnit_Framework_TestCase
      */
     public function testElevatorService()
     {
+        $random = md5(rand());
+        $outer = new Outer();
+        $outer->innerPublic = $random;
 
+        $elevatorService = new ElevatorService($outer);
+        /** @var Elevated $elevated */
+        $elevated = $elevatorService->elevate(Elevated::class);
+        $this->assertInstanceOf(Elevated::class, $elevated);
+        $this->assertEquals($random, $elevated->innerPublic);
+        $this->assertEquals('inner-private', $elevated->getInnerPrivate());
     }
 }

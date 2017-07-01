@@ -88,7 +88,7 @@ class ElevatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test an invalid target class
+     * Test a valid target class
      */
     public function testElevation()
     {

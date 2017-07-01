@@ -56,6 +56,6 @@ class Elevator
     public static function elevate($object, $class)
     {
         $elevatorService = new ElevatorService($object);
-        return $elevatorService->elevateToClass($class);
+        return $elevatorService->elevate($class);
     }
 }

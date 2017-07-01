@@ -1,8 +1,10 @@
 language: php
 php:
   - 5.6
-  - 7
+  - 7.0
+  - 7.1
   - hhvm
+dist: trusty
 env:
   - APP_ENV=development
 matrix:

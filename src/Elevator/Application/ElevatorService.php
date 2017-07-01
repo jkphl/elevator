@@ -37,6 +37,7 @@
 namespace Jkphl\Elevator\Application;
 
 use Jkphl\Elevator\Domain\ElevationMap;
+use Jkphl\Elevator\Domain\Elevator;
 
 /**
  * Elevator service
@@ -71,8 +72,8 @@ class ElevatorService
      */
     public function elevate($class)
     {
+        $elevator = new Elevator($this->source);
         $elevationMap = new ElevationMap($this->source);
-        print_r($elevationMap->getMap());
-        return $this->source;
+        return $elevator->elevate(new \ReflectionClass($class), $elevationMap);
     }
 }
