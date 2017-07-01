@@ -43,4 +43,4 @@ after_script:
     vendor/bin/coveralls -v; fi;'
 addons:
   code_climate:
-    repo_token: ed734d1a6a8c1fef74954f7b5e5eb020a4a9d3e3a8acb9ecb1791f0982f90da0
+    repo_token: e4ac8c5d9b2d98dee422dfcd403dd4c300a1902f7b75947c2ee1b9756c1f1368

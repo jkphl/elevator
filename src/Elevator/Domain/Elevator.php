@@ -79,7 +79,7 @@ class Elevator
         // If the object is of an internal class
         if ($this->class->isInternal()) {
             throw new UnexpectedValueException(
-                sprintf(UnexpectedValueException::NON_INTERNAL_REQUIRED_STR, $this->class->getName()),
+                sprintf(UnexpectedValueException::NON_INTERNAL_REQUIRED_STR, $this->class->name),
                 UnexpectedValueException::NON_INTERNAL_REQUIRED
             );
         }
@@ -95,12 +95,12 @@ class Elevator
     public function elevate(\ReflectionClass $class, ElevationMap $map)
     {
         // If the target class doesn't extend the source object class
-        if (!$class->isSubclassOf($this->class->getName())) {
+        if (!$class->isSubclassOf($this->class->name)) {
             throw new UnexpectedValueException(
                 sprintf(
                     UnexpectedValueException::INVALID_TARGET_CLASS_STR,
-                    $class->getName(),
-                    $this->class->getName()
+                    $class->name,
+                    $this->class->name
                 ),
                 UnexpectedValueException::INVALID_TARGET_CLASS
             );

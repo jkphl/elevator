@@ -83,9 +83,9 @@ class ElevationMap
         // Run through all reflection properties
         foreach ($class->getProperties() as $property) {
             // If the property is defined by the current class
-            if ($property->getDeclaringClass()->getName() === $class->getName()) {
+            if ($property->getDeclaringClass()->name === $class->name) {
                 $property->setAccessible(true);
-                $classMap[$property->getName()] = $property->getValue($this->object);
+                $classMap[$property->name] = $property->getValue($this->object);
                 $property->setAccessible(false);
             }
         }
