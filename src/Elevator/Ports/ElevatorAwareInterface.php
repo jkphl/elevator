@@ -36,26 +36,18 @@
 
 namespace Jkphl\Elevator\Ports;
 
-use Jkphl\Elevator\Application\ElevatorService;
-
 /**
- * Elevator facade
+ * Elevator aware interface
  *
  * @package Jkphl\Elevator
  * @subpackage Jkphl\Elevator\Ports
  */
-class Elevator
+interface ElevatorAwareInterface
 {
     /**
-     * Elevate an object to a target class
+     * Custom elevation pseudo constructor
      *
-     * @param object $object Source object
-     * @param string $class Target class name
-     * @return object Elevated object
+     * @param array ...$args Elevation arguments
      */
-    public static function elevate($object, $class)
-    {
-        $elevatorService = new ElevatorService($object);
-        return $elevatorService->elevate($class);
-    }
+    public function __elevate(...$args);
 }
