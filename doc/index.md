@@ -117,8 +117,8 @@ Copyright © 2017 [Joschi Kuphal][author-url] / joschi@kuphal.net. Licensed unde
 [scrutinizer-url]: https://scrutinizer-ci.com/g/jkphl/elevator/?branch=master
 [codeclimate-image]: https://lima.codeclimate.com/github/jkphl/elevator/badges/gpa.svg
 [codeclimate-url]: https://lima.codeclimate.com/github/jkphl/elevator
-[readthedocs-image]: https://readthedocs.org/projects/jkphl-elevator/badge/?version=latest
-[readthedocs-url]: http://jkphl-elevator.readthedocs.io/en/latest/?badge=latest
+[readthedocs-image]: https://readthedocs.org/projects/elevator-pattern/badge/?version=latest
+[readthedocs-url]: http://elevator-pattern.readthedocs.io/en/latest/
 [clear-architecture-image]: https://img.shields.io/badge/Clear%20Architecture-%E2%9C%94-brightgreen.svg
 [clear-architecture-url]: https://github.com/jkphl/clear-architecture
 [author-url]: https://jkphl.is
