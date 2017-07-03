@@ -36,14 +36,22 @@
 
 namespace Jkphl\Elevator\Tests\Fixture;
 
+use Jkphl\Elevator\Ports\ElevatorAwareInterface;
+
 /**
  * Elevated test class
  *
  * @package Jkphl\Elevator
  * @subpackage Jkphl\Elevator\Tests
  */
-class Elevated extends Outer
+class Elevated extends Outer implements ElevatorAwareInterface
 {
+    /**
+     * Property modified by the pseudo-constructor
+     *
+     * @var string
+     */
+    public $elevatedMagic = null;
     /**
      * Public property
      *
@@ -62,4 +70,16 @@ class Elevated extends Outer
      * @var string
      */
     protected $elevatedProtected = 'elevated-protected';
+
+    /**
+     * Custom elevation pseudo constructor
+     *
+     * @param array ...$args Elevation arguments
+     */
+    public function __elevate(...$args)
+    {
+        if (count($args)) {
+            $this->elevatedMagic = current($args);
+        }
+    }
 }

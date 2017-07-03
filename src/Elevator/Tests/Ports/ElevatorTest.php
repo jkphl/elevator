@@ -63,4 +63,18 @@ class ElevatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($random, $elevated->innerPublic);
         $this->assertEquals('inner-private', $elevated->getInnerPrivate());
     }
+
+    /**
+     * Test the __elevate() magic method
+     */
+    public function testElevatorMagic()
+    {
+        $random = md5(rand());
+        $outer = new Outer();
+
+        /** @var Elevated $elevated */
+        $elevated = Elevator::elevate($outer, Elevated::class, $random);
+        $this->assertInstanceOf(Elevated::class, $elevated);
+        $this->assertEquals($random, $elevated->elevatedMagic);
+    }
 }

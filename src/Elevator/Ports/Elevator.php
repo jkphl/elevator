@@ -51,11 +51,12 @@ class Elevator
      *
      * @param object $object Source object
      * @param string $class Target class name
+     * @param array $args Elevation arguments
      * @return object Elevated object
      */
-    public static function elevate($object, $class)
+    public static function elevate($object, $class, ...$args)
     {
         $elevatorService = new ElevatorService($object);
-        return $elevatorService->elevate($class);
+        return $elevatorService->elevate($class, ...$args);
     }
 }

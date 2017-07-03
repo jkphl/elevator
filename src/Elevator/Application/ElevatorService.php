@@ -38,6 +38,7 @@ namespace Jkphl\Elevator\Application;
 
 use Jkphl\Elevator\Domain\ElevationMap;
 use Jkphl\Elevator\Domain\Elevator;
+use Jkphl\Elevator\Ports\ElevatorAwareInterface;
 
 /**
  * Elevator service
@@ -68,12 +69,20 @@ class ElevatorService
      * Elevate the source object to the given target class
      *
      * @param string $class Target class name
+     * @param array $args Elevation arguments
      * @return object Elevated object
      */
-    public function elevate($class)
+    public function elevate($class, ...$args)
     {
         $elevator = new Elevator($this->source);
         $elevationMap = new ElevationMap($this->source);
-        return $elevator->elevate(new \ReflectionClass($class), $elevationMap);
+        $elevated = $elevator->elevate(new \ReflectionClass($class), $elevationMap);
+
+        // Call the magic elevation method
+        if ($elevated instanceof ElevatorAwareInterface) {
+            $elevated->__elevate(...$args);
+        }
+
+        return $elevated;
     }
 }
