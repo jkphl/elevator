@@ -79,7 +79,7 @@ class Elevated extends Outer implements ElevatorAwareInterface
     public function __elevate(...$args)
     {
         if (count($args)) {
-            $this->elevatedMagic = current($args);
+            $this->elevatedMagic = strval($args[0]);
         }
     }
 }

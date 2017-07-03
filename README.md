@@ -6,7 +6,7 @@
 
 ## Documentation
 
-Please find the [project documentation](doc/index.md) in the `doc` directory. We recommend [reading it](http://jkphl-elevator.readthedocs.io/) via *Read the Docs*.
+Please find the [project documentation](doc/index.md) in the `doc` directory. We recommend [reading it](http://elevator-pattern.readthedocs.io/) via *Read the Docs*.
 
 ## Installation
 

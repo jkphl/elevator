@@ -1,5 +1,5 @@
 site_name: jkphl/elevator
-site_description: Elevator pattern implementation for PHP projects
+site_description: Elevator pattern — type casting of user defined objects in PHP
 site_author: Joschi Kuphal
 repo_url: https://github.com/jkphl/elevator
 docs_dir: doc
